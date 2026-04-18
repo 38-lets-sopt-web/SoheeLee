@@ -146,6 +146,11 @@ main {
     gap: 16px;
     width: 100%;
     margin-bottom: 30px;
+
+    grid-template-areas:
+        "a b c c"
+        "d d d e"
+        "d d d f";
 }
 
 .photo-grid img {
@@ -156,45 +161,33 @@ main {
     display: block;
 }
 
-/* 1번 */
 .photo-grid img:nth-child(1) {
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
+    grid-area: a;
     aspect-ratio: 1 / 1;
 }
 
-/* 2번 */
 .photo-grid img:nth-child(2) {
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
+    grid-area: b;
     aspect-ratio: 1 / 1;
 }
 
-/* 3번 */
 .photo-grid img:nth-child(3) {
-    grid-column: 3 / 5;
-    grid-row: 1 / 2;
+    grid-area: c;
     aspect-ratio: 2 / 1;
 }
 
-/* 4번 */
 .photo-grid img:nth-child(4) {
-    grid-column: 1 / 4;
-    grid-row: 2 / 4;
+    grid-area: d;
     aspect-ratio: 3 / 2;
 }
 
-/* 5번 */
 .photo-grid img:nth-child(5) {
-    grid-column: 4 / 5;
-    grid-row: 2 / 3;
+    grid-area: e;
     aspect-ratio: 1 / 1;
 }
 
-/* 6번 */
 .photo-grid img:nth-child(6) {
-    grid-column: 4 / 5;
-    grid-row: 3 / 4;
+    grid-area: f;
     aspect-ratio: 1 / 1;
 }
 
