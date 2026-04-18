@@ -1,3 +1,25 @@
+:root {
+
+  --color-primary: #035c62;
+  --color-secondary: #6da6b0;
+  --color-light: #d7e6e9;
+  --color-white: #ffffff;
+  --color-text-dark: #222;
+
+
+  --color-like: #b7ddfb;
+  --color-like-hover: #8fc7f5;
+  --color-hate: #f5b5bb;
+  --color-hate-hover: #ef959d;
+
+ 
+  --color-hover: #3e747e;
+
+
+  --shadow-light: rgba(0, 0, 0, 0.12);
+  --shadow-strong: rgba(0, 0, 0, 0.2);
+}
+
 html {
     scroll-behavior: smooth;
     font-size: 62.5%;
@@ -10,7 +32,7 @@ section{
 header{
     display: flex;
     align-items: center;
-    background-color:#035c62;
+    background-color:var(--color-primary);
     padding: 1.2rem 2.4rem;
     position: fixed; 
     top: 0;
@@ -76,12 +98,12 @@ body {
     font-family: Arial; 
      background: linear-gradient(
     to bottom,
-    #035c62 0,
-    #035c62 1rem,
-    #6da6b0 1rem,
-    #6da6b0 calc(100% - 1rem),
-    #035c62 calc(100% - 1rem),
-    #035c62 100%
+    var(--color-primary) 0,
+    var(--color-primary) 1rem,
+    var(--color-secondary) 1rem,
+    var(--color-secondary) calc(100% - 1rem),
+    var(--color-primary) calc(100% - 1rem),
+    var(--color-primary) 100%
   );
 }
 /*네비게이션*/
@@ -90,7 +112,7 @@ nav {
     top: 100px;             
     width: 220px;        
     margin: 1%;           
-    background-color: #6da6b0; 
+    background-color: var(--color-secondary); 
     padding: 2.0rem;         
     box-sizing: border-box; 
     border-radius: 30px;
@@ -101,7 +123,7 @@ nav ul {
     list-style: none;       
     margin: 0;             
     padding: 1.0rem;             
-    background-color: #d7e6e9;
+    background-color: var(--color-light);
     border-radius: 2.5rem;
 
 }
@@ -119,7 +141,7 @@ nav ul li a {
 
 
 nav ul li a:hover {
-    background-color: #3e747e; 
+    background-color: var(--color-hover); 
 }
 
 nav li a {
@@ -245,16 +267,16 @@ main {
 }
 
 .interests-box {
-    background-color: white; 
+    background-color: var(--color-white); 
     border-radius: 2.0rem; 
     overflow: hidden; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); 
+    box-shadow: 0 4px 12px var(--shadow-light); 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     padding-bottom: 1.6rem;
 }
 .interests-box:hover{
     transform: translateY(-1.0rem); 
-    box-shadow: 0 1.0rem 2.0rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1.0rem 2.0rem var(--shadow-strong);
 }
 
 .interests-box img {
@@ -268,7 +290,7 @@ main {
     font-size: 1.6rem; 
     font-weight: bold; 
     margin: 1.5rem;
-    color: #222; 
+    color: var(--color-text-dark);
 }
 
 /*관심사 - 버튼*/
@@ -293,23 +315,23 @@ main {
 
 
 .box-buttons button:first-child {
-    background-color: #b7ddfb; 
+    background-color: var(--color-like); 
     color: white; 
 }
 
 
 .box-buttons button:first-child:hover {
-    background-color: #8fc7f5; 
+    background-color: var(--color-like-hover); 
     transform: translateY(-2px); 
 }
 
 .box-buttons button:last-child {
-    background-color: #f5b5bb; 
+    background-color: var(--color-hate); 
     color: white;
 }
 
 .box-buttons button:last-child:hover {
-    background-color: #ef959d; 
+    background-color: var(--color-hate-hover); 
     transform: translateY(-2px); 
 }
 
@@ -335,10 +357,10 @@ main {
 
 /*to.웹왔니*/
 .letter-box {
-    background-color: #d7e6e9; 
+    background-color: var(--color-light);
     padding: 2.0rem;
     border-radius: 2.0rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); 
+    box-shadow: 0 4px 12px var(--shadow-light);
 }
 
 .letter-box ul {
@@ -364,7 +386,7 @@ main {
 
 /*푸터*/
 footer {
-    background-color: #035c62;
+    background-color: var(--color-primary);
     text-align: center;
     padding: 2.0rem;
     color:white;
