@@ -1,5 +1,6 @@
 html {
     scroll-behavior: smooth;
+    font-size: 62.5%;
 }
 
 section{
@@ -10,7 +11,7 @@ header{
     display: flex;
     align-items: center;
     background-color:#035c62;
-    padding: 12px 24px;
+    padding: 1.2rem 2.4rem;
     position: fixed; 
     top: 0;
     left: 0;
@@ -24,8 +25,8 @@ header > div {
 }
 
 .profile img {
-    width: 48px;
-    height: 48px;
+    width: 4.8rem;
+    height: 4.8rem;
     border-radius: 50%;   
     object-fit: cover;      
     transition: box-shadow 0.3s ease;
@@ -43,12 +44,12 @@ header > div {
 
 .title h1 {
     margin: 0;              
-    font-size: 16px;   
+    font-size: 1.6rem;   
 }
 
 .title h2 {
     margin: 0;             
-    font-size: 12px;       
+    font-size: 1.2rem;       
     font-weight: normal; 
 }
 
@@ -58,8 +59,8 @@ header > div {
 }
 
 .icon img {
-    width: 40px;               
-    height: 40px;              
+    width: 4.0rem;               
+    height: 4.0rem;              
     transition: transform 0.2s ease, filter 0.2s ease; 
 }
 
@@ -71,7 +72,7 @@ header > div {
 
 body {
     margin: 0;          
-    padding-top: 72px;  
+    padding-top: 7.2rem;  
     font-family: Arial; 
      background: linear-gradient(
     to bottom,
@@ -90,7 +91,7 @@ nav {
     width: 220px;        
     margin: 1%;           
     background-color: #6da6b0; 
-    padding: 20px;         
+    padding: 2.0rem;         
     box-sizing: border-box; 
     border-radius: 30px;
     flex-shrink: 0; 
@@ -99,21 +100,21 @@ nav {
 nav ul {
     list-style: none;       
     margin: 0;             
-    padding: 10px;             
+    padding: 1.0rem;             
     background-color: #d7e6e9;
-    border-radius: 25px;
+    border-radius: 2.5rem;
 
 }
 
 nav ul li a {
     display: block;         
-    padding: 30px 24px;     
+    padding: 3.0rem 2.4rem;     
     text-decoration: none;  
     color: black;        
-    font-size: 20px;        
+    font-size: 2.0rem;        
     font-weight: bold;      
     transition: background-color 0.3s ease; 
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
 }
 
 
@@ -122,21 +123,21 @@ nav ul li a:hover {
 }
 
 nav li a {
-    border-radius: 30px;
+    border-radius: 3.0rem;
 }
 
 nav li:first-child a {
-    border-radius: 30px 30px 15px 15px;
+    border-radius: 3.0rem 3.0rem 1.5rem 1.5rem;
 }
 
 nav li:last-child a {
-    border-radius: 15px 15px 30px 30px;
+    border-radius: 1.5rem 1.5rem 3.0rem 3.0rem;
 }
 
 .container {
     display: flex;
     align-items: flex-start;
-    padding: 0.2%; 
+    padding: 0.2rem; 
 }
 
 main {
@@ -206,23 +207,23 @@ main {
 /*사진첩*/
 .gallery-scroll {
     display: flex;
-    gap: 16px;
-    padding: 10px;
+    gap: 1.6rem;
+    padding: 1.0rem;
     overflow: hidden;  /* auto → hidden */
     position: relative;
 }
 
 .gallery-track {
     display: flex;
-    gap: 16px;
+    gap: 1.6rem;
     animation: scroll-left 20s linear infinite;
 }
 
 .gallery-track img {
-    width: 150px;
-    height: 150px;
+    width: 15.0rem;
+    height: 15.0rem;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 1.2rem;
     flex-shrink: 0;
 }
 
@@ -239,21 +240,21 @@ main {
 .interests-grid {
     display: grid;
     grid-template-columns: repeat(5,1fr);
-    gap: 20px;
-    margin-top: 20px;
+    gap: 2.0rem;
+    margin-top: 2.0rem;
 }
 
 .interests-box {
     background-color: white; 
-    border-radius: 20px; 
+    border-radius: 2.0rem; 
     overflow: hidden; 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    padding-bottom: 16px;
+    padding-bottom: 1.6rem;
 }
 .interests-box:hover{
-    transform: translateY(-10px); 
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1.0rem); 
+    box-shadow: 0 1.0rem 2.0rem rgba(0, 0, 0, 0.2);
 }
 
 .interests-box img {
@@ -264,9 +265,9 @@ main {
 }
 
 .interests-box p {
-    font-size: 16px; 
+    font-size: 1.6rem; 
     font-weight: bold; 
-    margin: 15px;
+    margin: 1.5rem;
     color: #222; 
 }
 
@@ -274,8 +275,8 @@ main {
 .box-buttons {
     display: flex; 
     justify-content: center; 
-    gap: 15px; 
-    padding:0 10px;
+    gap: 1.5rem; 
+    padding:0 1.0rem;
 }
 
 
@@ -283,8 +284,8 @@ main {
 .box-buttons button {
     border: none; 
     border-radius: 500px;
-    padding: 10px 25px; 
-    font-size: 14px;
+    padding: 1.0rem 2.5rem; 
+    font-size: 1.4rem;
     font-weight: bold; 
     cursor: pointer; 
     transition: background-color 0.3s ease, transform 0.2s ease; /* hover 부드럽게 */
@@ -335,8 +336,8 @@ main {
 /*to.웹왔니*/
 .letter-box {
     background-color: #d7e6e9; 
-    padding: 20px;
-    border-radius: 20px;
+    padding: 2.0rem;
+    border-radius: 2.0rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); 
 }
 
@@ -347,27 +348,27 @@ main {
 }
 
 .letter-box li {
-    padding: 12px 0;
-    font-size: 16px;
+    padding: 1.2rem 0;
+    font-size: 1.6rem;
 }
 
 .letter-box li::before {
     content: "📢"; 
-    margin-right: 10px;
+    margin-right: 1.0rem;
 }
 
 .letter-box li::after {
     content: " ✅"; 
-    margin-right: 10px;
+    margin-right: 1.0rem;
 }
 
 /*푸터*/
 footer {
     background-color: #035c62;
     text-align: center;
-    padding: 20px;
+    padding: 2.0rem;
     color:white;
     font-weight: bold;
-    margin-top: 40px;
+    margin-top: 4.0rem;
 }
 
