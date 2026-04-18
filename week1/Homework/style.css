@@ -25,6 +25,22 @@ html {
     font-size: 62.5%;
 }
 
+
+body {
+    margin: 0;          
+    padding-top: 7.2rem;  
+    font-family: Arial; 
+     background: linear-gradient(
+    to bottom,
+    var(--color-primary) 0,
+    var(--color-primary) 1rem,
+    var(--color-secondary) 1rem,
+    var(--color-secondary) calc(100% - 1rem),
+    var(--color-primary) calc(100% - 1rem),
+    var(--color-primary) 100%
+  );
+}
+
 section{
     scroll-margin-top: 100px;
 }
@@ -60,7 +76,6 @@ header > div {
 
 .title {
     text-align: center; 
-    font-family: Arial;
     color:white;
 }
 
@@ -69,7 +84,7 @@ header > div {
     font-size: 1.6rem;   
 }
 
-.title h2 {
+.title p {
     margin: 0;             
     font-size: 1.2rem;       
     font-weight: normal; 
@@ -92,20 +107,6 @@ header > div {
 }
 
 
-body {
-    margin: 0;          
-    padding-top: 7.2rem;  
-    font-family: Arial; 
-     background: linear-gradient(
-    to bottom,
-    var(--color-primary) 0,
-    var(--color-primary) 1rem,
-    var(--color-secondary) 1rem,
-    var(--color-secondary) calc(100% - 1rem),
-    var(--color-primary) calc(100% - 1rem),
-    var(--color-primary) 100%
-  );
-}
 /*네비게이션*/
 nav {
     position: sticky;  
@@ -177,6 +178,7 @@ main {
     gap: 16px;
     width: 100%;
     margin-bottom: 30px;
+    overflow:hidden;
 
     grid-template-areas:
         "a b c c"
@@ -224,6 +226,7 @@ main {
 
 .photo-grid img:hover {
     transform: scale(1.03);
+    
 }
 
 /*사진첩*/
@@ -391,6 +394,5 @@ footer {
     padding: 2.0rem;
     color:white;
     font-weight: bold;
-    margin-top: 4.0rem;
+    margin-top: 4.0rem;ㅎ
 }
-
