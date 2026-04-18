@@ -73,7 +73,15 @@ body {
     margin: 0;          
     padding-top: 72px;  
     font-family: Arial; 
-    background-color: #6da6b0;    
+     background: linear-gradient(
+    to bottom,
+    #035c62 0,
+    #035c62 1rem,
+    #6da6b0 1rem,
+    #6da6b0 calc(100% - 1rem),
+    #035c62 calc(100% - 1rem),
+    #035c62 100%
+  );
 }
 /*네비게이션*/
 nav {
