@@ -1,0 +1,98 @@
+/* ===== Table Section ===== */
+#table-section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.2rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#table-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#sort-select {
+  height: 36px;
+  padding: 0 0.8rem;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  background: #ffffff;
+  cursor: pointer;
+  outline: none;
+}
+
+.toolbar-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.toolbar-btns button {
+  height: 38px;
+  padding: 0 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #035c62;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.toolbar-btns button:hover {
+  background-color: #333333;
+}
+
+/* ===== Table ===== */
+#expense-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+#expense-table th,
+#expense-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #eeeeee;
+}
+
+#expense-table thead th {
+  font-weight: 600;
+  border-bottom: 2px solid #dddddd;
+  background-color: #fafafa;
+}
+
+#expense-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+#expense-table tbody .title-cell {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#expense-table tfoot td {
+  font-weight: 700;
+  border-top: 2px solid #dddddd;
+  border-bottom: none;
+  padding-top: 14px;
+}
+
+.empty-row td {
+  color: #999999;
+  padding: 2rem 0;
+}
+
+.amount-pos {
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.amount-neg {
+  color: #dc2626;
+  font-weight: 500;
+}
