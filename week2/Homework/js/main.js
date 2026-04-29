@@ -2,26 +2,29 @@ import './data.js';
 
 const STORAGE_KEY = 'expenses';
 
+// ===== 데이터 관리 =====
+let cachedData = null;
+
 function getData() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  if (!cachedData) {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    cachedData = saved ? JSON.parse(saved) : [];
+  }
+  return cachedData;
 }
 
 function saveData(data) {
+  cachedData = data;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
 
 // ===== 필터 상태 =====
 let activeFilter = { title: '', type: '', category: '', payment: '' };
 
-// ===== 테이블 렌더링 =====
-function renderTable() {
-  const data = getData();
-  const tbody = document.getElementById('table-body');
-  const sortValue = document.getElementById('sort-select').value;
-
-  // 필터 적용
-  let filtered = data.filter(item => {
-    const matchTitle = item.title.includes(activeFilter.title);
+// ===== 필터 적용 함수 =====
+function applyFilter(data) {
+  return data.filter(item => {
+    const matchTitle = item.title.toLowerCase().includes(activeFilter.title.toLowerCase());
     const matchType =
       activeFilter.type === '' ||
       (activeFilter.type === 'income' && item.amount > 0) ||
@@ -30,23 +33,32 @@ function renderTable() {
     const matchPayment = activeFilter.payment === '' || item.payment === activeFilter.payment;
     return matchTitle && matchType && matchCategory && matchPayment;
   });
+}
 
-  // 정렬
-  filtered.sort((a, b) => {
+// ===== 정렬 함수 =====
+function applySort(data) {
+  const sortValue = document.getElementById('sort-select').value;
+  return [...data].sort((a, b) => {
     if (sortValue === 'date-desc') return new Date(b.date) - new Date(a.date);
     if (sortValue === 'date-asc') return new Date(a.date) - new Date(b.date);
   });
+}
 
-  // 렌더링
+// ===== 테이블 렌더링 =====
+function renderTable() {
+  const data = getData();
+  const tbody = document.getElementById('table-body');
+
+  const filtered = applyFilter(data);
+  const sorted = applySort(filtered);
+
   tbody.innerHTML = '';
 
-  if (filtered.length === 0) {
+  if (sorted.length === 0) {
     tbody.innerHTML = `<tr class="empty-row"><td colspan="6">내역이 없습니다.</td></tr>`;
   } else {
-    filtered.forEach(item => {
-      const isIncome = item.amount > 0;
-      const amountClass = isIncome ? 'amount-pos' : 'amount-neg';
-      const displayAmount = (isIncome ? '+' : '') + item.amount.toLocaleString();
+    sorted.forEach(item => {
+      const { displayAmount, amountClass } = formatAmount(item.amount);
 
       const tr = document.createElement('tr');
       tr.innerHTML = `
@@ -61,13 +73,29 @@ function renderTable() {
     });
   }
 
-  // total
   const total = filtered.reduce((sum, item) => sum + item.amount, 0);
   const totalEl = document.getElementById('total-amount');
   totalEl.textContent = (total > 0 ? '+' : '') + total.toLocaleString();
   totalEl.className = total >= 0 ? 'amount-pos' : 'amount-neg';
 
   document.getElementById('check-all').checked = false;
+}
+
+function formatAmount(amount) {
+  const isIncome = amount > 0;
+  return {
+    displayAmount: (isIncome ? '+' : '') + amount.toLocaleString(),
+    amountClass: isIncome ? 'amount-pos' : 'amount-neg'
+  };
+}
+
+function resetAddForm() {
+  document.getElementById('add-title').value = '';
+  document.getElementById('add-type').value = 'expense';
+  document.getElementById('add-amount').value = '';
+  document.getElementById('add-date').value = '';
+  document.getElementById('add-category').value = '';
+  document.getElementById('add-payment').value = '';
 }
 
 // ===== 전체 체크박스 =====
@@ -104,19 +132,22 @@ document.getElementById('btn-delete').addEventListener('click', () => {
   if (checked.length === 0) return;
 
   const ids = Array.from(checked).map(cb => Number(cb.dataset.id));
-  saveData(getData().filter(item => !ids.includes(item.id)));
+  const idSet = new Set(ids);
+  saveData(getData().filter(item => !idSet.has(item.id)));
   renderTable();
 });
 
 // ===== 항목 상세 모달 =====
 document.getElementById('table-body').addEventListener('click', (e) => {
-  if (!e.target.classList.contains('title-cell')) return;
+  const titleCell = e.target.closest('.title-cell');
+  if (!titleCell) return;
 
-  const id = Number(e.target.dataset.id);
+  const id = Number(titleCell.dataset.id);
   const item = getData().find(d => d.id === id);
   if (!item) return;
 
-  const displayAmount = (item.amount > 0 ? '+' : '') + item.amount.toLocaleString() + '원';
+  const { displayAmount } = formatAmount(item.amount);
+  document.getElementById('detail-amount').textContent = displayAmount + '원';
   document.getElementById('detail-title').textContent = item.title;
   document.getElementById('detail-amount').textContent = displayAmount;
   document.getElementById('detail-date').textContent = item.date;
@@ -167,18 +198,21 @@ document.getElementById('btn-add-submit').addEventListener('click', () => {
 
   const data = getData();
   const newId = data.length > 0 ? Math.max(...data.map(d => d.id)) + 1 : 1;
-  const amount = type === 'expense' ? -Math.abs(Number(amountInput)) : Math.abs(Number(amountInput));
+  // after
+const amount = Number(amountInput);
 
-  data.push({ id: newId, title, date, category, payment, amount });
+if (isNaN(amount) || amount <= 0) {
+  alert('올바른 금액을 입력해주세요.');
+  return;
+}
+
+const signedAmount = type === 'expense' ? -Math.abs(amount) : Math.abs(amount);
+
+  data.push({ id: newId, title, date, category, payment, amount: signedAmount });
   saveData(data);
 
   // 입력 초기화
-  document.getElementById('add-title').value = '';
-  document.getElementById('add-type').value = 'expense';
-  document.getElementById('add-amount').value = '';
-  document.getElementById('add-date').value = '';
-  document.getElementById('add-category').value = '';
-  document.getElementById('add-payment').value = '';
+  resetAddForm();
 
   document.getElementById('add-backdrop').classList.add('hidden');
   renderTable();

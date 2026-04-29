@@ -1,0 +1,26 @@
+:root {
+  /* Brand */
+  --color-primary: #035c62;
+  --color-hover: #333333;
+
+  /* Text */
+  --color-text: #1a1a1a;
+  --color-text-muted: #555555;
+  --color-text-light: #999999;
+  --color-text-blue: #3a5a8a;
+
+  /* Background */
+  --color-white: #ffffff;
+  --color-bg: #f0f0f0;
+  --color-bg-light: #fafafa;
+  --color-bg-hover: #f9f9f9;
+
+  /* Border */
+  --color-border: #d0d0d0;
+  --color-border-light: #eeeeee;
+  --color-border-dark: #dddddd;
+
+  /* Amount */
+  --color-income: #2563eb;
+  --color-expense: #dc2626;
+}

@@ -14,7 +14,7 @@
 }
 
 .modal {
-  background: #ffffff;
+  background:var(--color-white);
   border-radius: 16px;
   width: 480px;
   max-width: 90vw;
@@ -39,13 +39,12 @@
   background: none;
   border: none;
   font-size: 1.4rem;
-  cursor: pointer;
-  color: #555555;
+  color: var(--color-text-muted);
   line-height: 1;
 }
 
 .modal-close:hover {
-  color: #1a1a1a;
+  color: var(--color-text);
 }
 
 /* ===== Detail Modal ===== */
@@ -53,7 +52,7 @@
   display: flex;
   align-items: center;
   padding: 1rem 0;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid var(--color-border-light);
   gap: 1rem;
 }
 
@@ -63,7 +62,7 @@
 
 .modal-label {
   font-weight: 600;
-  color: #3a5a8a;
+  color: var(--color-text-blue);
   width: 80px;
   flex-shrink: 0;
 }
@@ -84,16 +83,16 @@
 .form-group select {
   height: 44px;
   padding: 0 0.8rem;
-  border: 1px solid #d0d0d0;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 0.9rem;
   outline: none;
-  background: #ffffff;
+  background: var(--color-white);
 }
 
 .form-group input:focus,
 .form-group select:focus {
-  border-color: #1a1a1a;
+  border-color: var(--color-text);
 }
 
 .form-row {
@@ -107,14 +106,13 @@
   width: 120px;
   border: none;
   border-radius: 8px;
-  background-color: #1a1a1a;
-  color: #ffffff;
+  background-color: var(--color-text);
+  color: var(--color-white);
   font-size: 1rem;
   font-weight: 600;
-  cursor: pointer;
   margin-top: 0.5rem;
 }
 
 #btn-add-submit:hover {
-  background-color: #333333;
+  background-color: var(--color-hover);
 }

@@ -1,6 +1,6 @@
 /* ===== Table Section ===== */
 #table-section {
-  background: #ffffff;
+  background: var(--color-white);
   border-radius: 12px;
   padding: 1.2rem 2rem 2rem;
   display: flex;
@@ -17,10 +17,10 @@
 #sort-select {
   height: 36px;
   padding: 0 0.8rem;
-  border: 1px solid #d0d0d0;
+  border: 1px solid var(--color-border);
   border-radius: 6px;
   font-size: 0.85rem;
-  background: #ffffff;
+  background: var(--color-white);
   cursor: pointer;
   outline: none;
 }
@@ -35,15 +35,15 @@
   padding: 0 1.2rem;
   border: none;
   border-radius: 6px;
-  background-color: #035c62;
-  color: #ffffff;
+  background-color: var(--color-primary);
+  color: var(--color-white);
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
 }
 
 .toolbar-btns button:hover {
-  background-color: #333333;
+  background-color: var(--color-hover);
 }
 
 /* ===== Table ===== */
@@ -57,17 +57,17 @@
 #expense-table td {
   padding: 12px;
   text-align: center;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid var(--color-border-light);
 }
 
 #expense-table thead th {
   font-weight: 600;
-  border-bottom: 2px solid #dddddd;
-  background-color: #fafafa;
+  border-bottom: 2px solid var(--color-border-dark);
+  background-color: var( --color-bg-hover);
 }
 
 #expense-table tbody tr:hover {
-  background-color: #f9f9f9;
+  background-color: var(--color-bg-light);
 }
 
 #expense-table tbody .title-cell {
@@ -77,22 +77,22 @@
 
 #expense-table tfoot td {
   font-weight: 700;
-  border-top: 2px solid #dddddd;
+  border-top: 2px solid var(--color-border-dark);
   border-bottom: none;
   padding-top: 14px;
 }
 
 .empty-row td {
-  color: #999999;
+  color: var(--color-grey);
   padding: 2rem 0;
 }
 
 .amount-pos {
-  color: #2563eb;
+  color: var(--color-income);
   font-weight: 500;
 }
 
 .amount-neg {
-  color: #dc2626;
+  color: var(--color-expense);
   font-weight: 500;
 }

@@ -2,8 +2,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  background-color: #035c62;
-  color: #ffffff;
+  background-color: var(--color-primary);
+  color: var(--color-white);
   padding: 0 2rem;
   height: 60px;
 }
