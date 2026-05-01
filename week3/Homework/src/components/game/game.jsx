@@ -12,6 +12,9 @@ function Game() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [holes, setHoles] = useState([null, null, null, null]);
   const [level, setLevel] = useState(1);
+  const [successCount, setSuccessCount] = useState(0);
+  const [failCount, setFailCount] = useState(0); 
+  const [message, setMessage] = useState(''); 
 
   // 게임 타이머
   useEffect(() => {
@@ -64,6 +67,9 @@ function Game() {
   setScore(0);
   setTimeLeft(LEVEL_CONFIG[level].time);
   setHoles(Array(LEVEL_CONFIG[level].size * LEVEL_CONFIG[level].size).fill(null));
+  setSuccessCount(0);
+  setFailCount(0);
+  setMessage('');
 };
 
   const handleStart = () => {
@@ -71,20 +77,25 @@ function Game() {
   setScore(0);
   setTimeLeft(LEVEL_CONFIG[level].time);
   setIsPlaying(true);
-  setHoles(Array(size * size).fill(null)); // 레벨에 따라 구멍 개수 달라짐
+  setHoles(Array(size * size).fill(null)); 
+  setSuccessCount(0);
+  setFailCount(0);
+  setMessage('');
 };
 
  const handleClick = (index) => {
   if (!isPlaying) return;
   if (holes[index] === null) return;
 
-  if (holes[index] === 'mole') {
-    setScore((prev) => prev + 1);
-    setHoles((prev) => {
-      const newHoles = [...prev];
-      newHoles[index] = 'hit';
-      return newHoles;
-    });
+if (holes[index] === 'mole') {
+      setScore((prev) => prev + 1);
+      setSuccessCount((prev) => prev + 1);
+      setMessage('성공! 🎉');
+      setHoles((prev) => {
+        const newHoles = [...prev];
+        newHoles[index] = 'hit';
+        return newHoles;
+      });
     setTimeout(() => {
       setHoles((prev) => {
         const newHoles = [...prev];
@@ -93,12 +104,14 @@ function Game() {
       });
     }, 700);
   } else if (holes[index] === 'bomb') {
-    setScore((prev) => prev - 1);
-    setHoles((prev) => {
-      const newHoles = [...prev];
-      newHoles[index] = null;
-      return newHoles;
-    });
+      setScore((prev) => prev - 1);
+      setFailCount((prev) => prev + 1);
+      setMessage('실패! 💣');
+      setHoles((prev) => {
+        const newHoles = [...prev];
+        newHoles[index] = null;
+        return newHoles;
+      });
   }
 };
 
@@ -107,6 +120,8 @@ return (
     <div>
       <p>남은 시간: {timeLeft}</p>
       <p>총 점수: {score}</p>
+      <p>성공: {successCount} / 실패: {failCount}</p>
+      <p>{message}</p>
     </div>
     <div>
       <select 
