@@ -22,12 +22,21 @@ function Game() {
   useEffect(() => {
     if (!isPlaying) return;
 
-    if (timeLeft === 0) {
-    setIsPlaying(false);
-    setHoles(Array(LEVEL_CONFIG[level].size * LEVEL_CONFIG[level].size).fill(null));
-    setShowModal(true); // alert 대신 모달 띄우기
-    return;
-    }   
+if (timeLeft === 0) {
+  setIsPlaying(false);
+  setHoles(Array(LEVEL_CONFIG[level].size * LEVEL_CONFIG[level].size).fill(null));
+  
+  const record = {
+    level: level,
+    score: score,
+    date: new Date().toLocaleString(),
+  };
+  const existing = JSON.parse(localStorage.getItem('rankings') || '[]');
+  localStorage.setItem('rankings', JSON.stringify([...existing, record]));
+  
+  setShowModal(true);
+  return;
+}
 
     const timer = setInterval(() => {
       setTimeLeft((prev) => prev - 1);
