@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Header from './components/header/header';
 import Ranking from './components/ranking/ranking';
 import Game from './components/game/game';  
+import './index.css';
 
 
 function App() {
