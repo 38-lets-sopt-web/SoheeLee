@@ -3,9 +3,9 @@ import styled from '@emotion/styled';
 import Modal from '../modal/modal';
 
 const LEVEL_CONFIG = {
-  1: { size: 2, time: 15 },
-  2: { size: 3, time: 20 },
-  3: { size: 4, time: 30 },
+  1: { size: 2, time: 150 },
+  2: { size: 3, time: 200 },
+  3: { size: 4, time: 300 },
 };
 
 const GameWrapper = styled.div`
@@ -123,7 +123,7 @@ const Button = styled.button`
 
 function Game() {
   const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(15);
+  const [timeLeft, setTimeLeft] = useState(150);
   const [isPlaying, setIsPlaying] = useState(false);
   const [holes, setHoles] = useState(Array(LEVEL_CONFIG[1].size * LEVEL_CONFIG[1].size).fill(null));
   const [level, setLevel] = useState(1);
@@ -137,19 +137,21 @@ function Game() {
     if (timeLeft === 0) {
       setIsPlaying(false);
       setHoles(Array(LEVEL_CONFIG[level].size * LEVEL_CONFIG[level].size).fill(null));
-      const record = {
-        level: level,
-        score: score,
-        date: new Date().toLocaleString(),
-      };
+      const clearTime = ((LEVEL_CONFIG[level].time - timeLeft) / 10).toFixed(2);
+const record = {
+  level: level,
+  score: score,
+  date: new Date().toLocaleString(),
+  clearTime: parseFloat(clearTime),
+};
       const existing = JSON.parse(localStorage.getItem('rankings') || '[]');
       localStorage.setItem('rankings', JSON.stringify([...existing, record]));
       setShowModal(true);
       return;
     }
     const timer = setInterval(() => {
-      setTimeLeft((prev) => prev - 1);
-    }, 1000);
+  setTimeLeft((prev) => prev - 1);
+}, 100); 
     return () => clearInterval(timer);
   }, [isPlaying, timeLeft]);
 
@@ -233,7 +235,7 @@ function Game() {
       <StatusPanel>
         <StatusBox>
           <StatusLabel>남은 시간</StatusLabel>
-          <StatusValue>{timeLeft}</StatusValue>
+          <StatusValue>{(timeLeft / 10).toFixed(1)}</StatusValue>
         </StatusBox>
         <StatusBox>
           <StatusLabel>총 점수</StatusLabel>

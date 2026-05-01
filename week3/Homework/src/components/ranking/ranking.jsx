@@ -78,6 +78,7 @@ function Ranking() {
             <Th>레벨</Th>
             <Th>점수</Th>
             <Th>날짜</Th>
+            <Th>성공 시간</Th>
           </tr>
         </thead>
         <tbody>
@@ -87,6 +88,7 @@ function Ranking() {
               <Td>Level {record.level}</Td>
               <Td>{record.score}</Td>
               <Td>{record.date}</Td>
+              <Td>{record.clearTime}초</Td>
             </Tr>
           ))}
         </tbody>
