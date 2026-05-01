@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Modal from '../modal/modal';
 
 const LEVEL_CONFIG = {
   1: { size: 2, time: 15 },
@@ -15,6 +16,7 @@ function Game() {
   const [successCount, setSuccessCount] = useState(0);
   const [failCount, setFailCount] = useState(0); 
   const [message, setMessage] = useState(''); 
+  const [showModal, setShowModal] = useState(false);
 
   // 게임 타이머
   useEffect(() => {
@@ -23,9 +25,9 @@ function Game() {
     if (timeLeft === 0) {
     setIsPlaying(false);
     setHoles(Array(LEVEL_CONFIG[level].size * LEVEL_CONFIG[level].size).fill(null));
-    alert(`게임 종료! 최종 점수: ${score}`);
+    setShowModal(true); // alert 대신 모달 띄우기
     return;
-    }
+    }   
 
     const timer = setInterval(() => {
       setTimeLeft((prev) => prev - 1);
@@ -146,7 +148,16 @@ return (
     </div>
     <button onClick={handleStart} disabled={isPlaying}>시작</button>
     {isPlaying && <button onClick={handleStop}>중단</button>}
+
+    {showModal && (
+  <Modal 
+    score={score} 
+    onClose={() => setShowModal(false)} 
+  />
+)}
+
   </div>
+  
 );
 }
 
