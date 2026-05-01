@@ -1,4 +1,58 @@
 import { useState } from 'react';
+import styled from '@emotion/styled';
+
+const RankingWrapper = styled.div`
+  padding: 2rem;
+`;
+
+const Title = styled.h2`
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4a90e2;
+  margin-bottom: 1.5rem;
+`;
+
+const ResetButton = styled.button`
+  padding: 0.5rem 1.5rem;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+`;
+
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,0.1);
+`;
+
+const Th = styled.th`
+  background-color: #4a90e2;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1rem;
+`;
+
+const Tr = styled.tr`
+  &:nth-of-type(even) {
+    background-color: #f0f8ff;
+  }
+`;
+
+const Td = styled.td`
+  padding: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  color: #333;
+`;
 
 function Ranking() {
   const [rankings, setRankings] = useState(() => {
@@ -14,30 +68,30 @@ function Ranking() {
   };
 
   return (
-    <div>
-      <h2>랭킹 보드</h2>
-      <button onClick={handleReset}>초기화</button>
-      <table>
+    <RankingWrapper>
+      <Title>랭킹 보드</Title>
+      <ResetButton onClick={handleReset}>초기화</ResetButton>
+      <Table>
         <thead>
           <tr>
-            <th>순위</th>
-            <th>레벨</th>
-            <th>점수</th>
-            <th>날짜</th>
+            <Th>순위</Th>
+            <Th>레벨</Th>
+            <Th>점수</Th>
+            <Th>날짜</Th>
           </tr>
         </thead>
         <tbody>
           {rankings.map((record, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>Level {record.level}</td>
-              <td>{record.score}</td>
-              <td>{record.date}</td>
-            </tr>
+            <Tr key={index}>
+              <Td>{index + 1}</Td>
+              <Td>Level {record.level}</Td>
+              <Td>{record.score}</Td>
+              <Td>{record.date}</Td>
+            </Tr>
           ))}
         </tbody>
-      </table>
-    </div>
+      </Table>
+    </RankingWrapper>
   );
 }
 
