@@ -1,0 +1,98 @@
+/* ===== Table Section ===== */
+#table-section {
+  background: var(--color-white);
+  border-radius: 12px;
+  padding: 1.2rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#table-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#sort-select {
+  height: 36px;
+  padding: 0 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  background: var(--color-white);
+  cursor: pointer;
+  outline: none;
+}
+
+.toolbar-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.toolbar-btns button {
+  height: 38px;
+  padding: 0 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.toolbar-btns button:hover {
+  background-color: var(--color-hover);
+}
+
+/* ===== Table ===== */
+#expense-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+#expense-table th,
+#expense-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+#expense-table thead th {
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-border-dark);
+  background-color: var( --color-bg-hover);
+}
+
+#expense-table tbody tr:hover {
+  background-color: var(--color-bg-light);
+}
+
+#expense-table tbody .title-cell {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#expense-table tfoot td {
+  font-weight: 700;
+  border-top: 2px solid var(--color-border-dark);
+  border-bottom: none;
+  padding-top: 14px;
+}
+
+.empty-row td {
+  color: var(--color-grey);
+  padding: 2rem 0;
+}
+
+.amount-pos {
+  color: var(--color-income);
+  font-weight: 500;
+}
+
+.amount-neg {
+  color: var(--color-expense);
+  font-weight: 500;
+}

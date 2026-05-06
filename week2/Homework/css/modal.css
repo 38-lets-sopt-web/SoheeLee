@@ -1,0 +1,118 @@
+/* ===== Modal Common ===== */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.backdrop.hidden {
+  display: none;
+}
+
+.modal {
+  background:var(--color-white);
+  border-radius: 16px;
+  width: 480px;
+  max-width: 90vw;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--color-text-muted);
+  line-height: 1;
+}
+
+.modal-close:hover {
+  color: var(--color-text);
+}
+
+/* ===== Detail Modal ===== */
+.modal-body .modal-row {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-border-light);
+  gap: 1rem;
+}
+
+.modal-row:last-child {
+  border-bottom: none;
+}
+
+.modal-label {
+  font-weight: 600;
+  color: var(--color-text-blue);
+  width: 80px;
+  flex-shrink: 0;
+}
+
+/* ===== Add Modal ===== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+  height: 44px;
+  padding: 0 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+  background: var(--color-white);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--color-text);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+#btn-add-submit {
+  height: 48px;
+  width: 120px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--color-text);
+  color: var(--color-white);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+#btn-add-submit:hover {
+  background-color: var(--color-hover);
+}

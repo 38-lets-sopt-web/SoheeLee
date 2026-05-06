@@ -1,0 +1,24 @@
+#header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 0 2rem;
+  height: 60px;
+}
+
+#header-left {
+  font-size: 1.4rem;
+}
+
+#header-center {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+#header-right {
+  text-align: right;
+  font-size: 0.9rem;
+}
