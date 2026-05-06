@@ -1,11 +1,34 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function SignupPage() {
+    const [signupForm, setSignupForm] = useState({
+        signupId: '',
+        password: '',
+        name: '',
+        email: '',
+        age: '',
+        part: '',
+    });
+        const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;   
+        setSignupForm({
+            ...signupForm,
+            [name]: value,
+        });
+    };
+        const handleSignup = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        //api 연결 전이라 입력값이 잘 저장되는지 확인하기 위해 콘솔에 출력
+        console.log('회원가입 정보:', signupForm);
+    }
+
   return (
     <main>
       <h1>회원가입</h1>
 
-      <form>
+      <form onSubmit={handleSignup}>
         <div>
           <label htmlFor="signupId">아이디</label>
           <input
@@ -13,6 +36,8 @@ function SignupPage() {
             id="signupId"
             name="signupId"
             placeholder="아이디를 입력하세요"
+            value={signupForm.signupId}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -22,6 +47,8 @@ function SignupPage() {
             id="password"
             name="password"
             placeholder="비밀번호를 입력하세요"
+            value={signupForm.password}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -31,6 +58,8 @@ function SignupPage() {
             id="name"
             name="name"
             placeholder="이름을 입력하세요"
+            value={signupForm.name}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -40,6 +69,8 @@ function SignupPage() {
             id="email"
             name="email"
             placeholder="이메일을 입력하세요"
+            value={signupForm.email}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -49,6 +80,8 @@ function SignupPage() {
             id="age"
             name="age"
             placeholder="나이를 입력하세요"
+            value={signupForm.age}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -58,6 +91,8 @@ function SignupPage() {
             id="part"
             name="part"
             placeholder="파트를 입력하세요"
+            value={signupForm.part}
+            onChange={handleChange}
           />
         </div>
 
