@@ -1,9 +1,12 @@
 import {useParams,useNavigate} from 'react-router-dom';
+import Header from '../components/Header';
 
 function MemberDetailPage() {
   const {memberId} = useParams();
   const navigate = useNavigate();
     return (    
+        <>
+        <Header />
         <main>  
             <h1>상세 정보</h1>
             <button type="button" onClick={() => navigate('/members')}>
@@ -18,6 +21,7 @@ function MemberDetailPage() {
             <p>파트:추후 api 연결</p>
             </section>
         </main>
+        </>
     )
 }
 

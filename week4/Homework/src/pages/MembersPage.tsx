@@ -1,5 +1,9 @@
+import Header from '../components/Header';
+
 function MembersPage() {
   return (
+    <>
+    <Header />
     <main> 
         <h1>회원 조회</h1>
         <section>
@@ -29,7 +33,7 @@ function MembersPage() {
         </ul>
         </section>
     </main>
-    
+    </>
   )
 }
 

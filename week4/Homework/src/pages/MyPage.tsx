@@ -1,5 +1,9 @@
+import Header from '../components/Header';
+
 function MyPage() {
   return (
+    <>
+    <Header />
     <main>
         <h1>내 정보</h1>
     
@@ -39,6 +43,7 @@ function MyPage() {
         <button type="submit">정보 수정</button>
     </form>
     </main>
+    </>
   )
 }
 
