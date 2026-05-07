@@ -1,28 +1,61 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import api from "../api/axios";
+import axios from "axios";
 
 function SignupPage() {
-    const [signupForm, setSignupForm] = useState({
-        signupId: '',
-        password: '',
-        name: '',
-        email: '',
-        age: '',
-        part: '',
+  const navigate = useNavigate();
+  const [signupForm, setSignupForm] = useState({
+    signupId: "",
+    password: "",
+    name: "",
+    email: "",
+    age: "",
+    part: "",
+  });
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setSignupForm({
+      ...signupForm,
+      [name]: value,
     });
-        const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;   
-        setSignupForm({
-            ...signupForm,
-            [name]: value,
-        });
-    };
-        const handleSignup = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+  };
+  const handleSignup = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      const signupData = {
+        loginId: signupForm.signupId,
+        password: signupForm.password,
+        name: signupForm.name,
+        email: signupForm.email,
+        age: Number(signupForm.age),
+        part: signupForm.part,
+      }; 
 
-        //api 연결 전이라 입력값이 잘 저장되는지 확인하기 위해 콘솔에 출력
-        console.log('회원가입 정보:', signupForm);
-    }
+      await api.post("/api/v1/auth/signup", signupData);
+      console.log("회원가입 성공");
+      alert("회원가입이 완료되었습니다!");
+      navigate("/login");
+    }  catch (error) {
+  alert("회원가입에 실패했습니다.");
+
+  if (axios.isAxiosError(error)) {
+    console.error("에러 상태 코드:", error.response?.status);
+    console.error("에러 응답 데이터:", error.response?.data);
+    console.error("내가 보낸 데이터:", {
+      loginId: signupForm.signupId,
+      password: signupForm.password,
+      name: signupForm.name,
+      email: signupForm.email,
+      age: Number(signupForm.age),
+      part: signupForm.part,
+    });
+    return;
+  }
+
+  console.error("알 수 없는 에러:", error);
+}
+  };
 
   return (
     <main>

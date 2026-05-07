@@ -1,16 +1,41 @@
-import {Link} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
 import { useState } from 'react';
+import api from '../api/axios';
 
 function LoginPage() {
+    const navigate = useNavigate();
     const [loginId, setLoginId] = useState('');
     const [password, setPassword] = useState('');
     
-    const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        // 아직 API 연결 전이라 입력값이 잘 저장되는지 확인하기 위해 콘솔에 출력
-        console.log('아이디', loginId);
-        console.log('비밀번호', password);
+        try {
+            const loginData = {
+                loginId,
+                password,
+            };
+            const response = await api.post('/api/v1/auth/signin', loginData);
+            
+            console.log('로그인 성공:', response.data);
+            
+
+            const userId = response.data.data?.userId;
+            console.log('로그인한 userId:', userId);
+            
+            if (userId) {
+                localStorage.setItem('userId', String(userId));
+            }
+
+            alert('로그인에 성공했습니다!');    
+
+            navigate('/mypage');
+            
+            
+        } catch (error) {
+            console.error('로그인 실패:', error);
+            alert('로그인에 실패했습니다. 다시 시도해주세요.');
+        }
     };
   return (
     <main>
