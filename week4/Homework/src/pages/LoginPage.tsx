@@ -1,6 +1,6 @@
 import {Link,useNavigate} from 'react-router-dom';
 import { useState } from 'react';
-import api from '../api/axios';
+import api from '@/api/axios';
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ function LoginPage() {
 
             const userId = response.data.data?.userId;
             console.log('로그인한 userId:', userId);
-            
+
             if (userId) {
                 localStorage.setItem('userId', String(userId));
             }

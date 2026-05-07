@@ -1,6 +1,6 @@
-import Header from "../components/Header";
+import Header from "@/components/Header";
 import { useState, useEffect } from "react";
-import api from "../api/axios";
+import api from "@/api/axios";
 import { useNavigate } from "react-router-dom";
 
 interface User {

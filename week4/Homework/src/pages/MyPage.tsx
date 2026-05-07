@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import Header from "../components/Header";
-import api from "../api/axios";
+import Header from "@/components/Header";
+import api from "@/api/axios";
 
 interface UserInfo {
   id: number;

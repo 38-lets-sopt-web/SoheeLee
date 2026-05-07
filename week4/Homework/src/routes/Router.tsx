@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import LoginPage from "../pages/LoginPage";
-import SignupPage from "../pages/SignupPage";
-import MyPage from "../pages/MyPage";
-import MembersPage from "../pages/MembersPage";
-import MemberDetailPage from "../pages/MemberDetailPage";
+import LoginPage from "@/pages/LoginPage";
+import SignupPage from "@/pages/SignupPage";
+import MyPage from "@/pages/MyPage";
+import MembersPage from "@/pages/MembersPage";
+import MemberDetailPage from "@/pages/MemberDetailPage";
 
 function Router() {
   return (

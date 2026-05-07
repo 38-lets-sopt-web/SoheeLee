@@ -1,6 +1,9 @@
+import styled from "@emotion/styled";
 import {useNavigate} from 'react-router-dom';
 import { useEffect,useState } from 'react';
-import api from '../api/axios';
+import api from '@/api/axios';
+
+
 
 function Header() {
   const navigate = useNavigate();
@@ -28,28 +31,74 @@ function Header() {
     navigate('/login');
   };
   return (
-    <header>
-        <div>
-        <h1>SOPT MEMBERS</h1>
-        <p>안녕하세요, {userName||'사용자'}님!</p>
-        </div>
+    <HeaderWrapper>
+        <TitleArea>
+        <Title>SOPT MEMBERS</Title>
+        <Greeting>안녕하세요, {userName||'사용자'}님!</Greeting>
+        </TitleArea>
 
-        <nav>   
-        <button type="button" onClick={() => navigate('/mypage')}>
+        <Nav>   
+        <NavButton type="button" onClick={() => navigate('/mypage')}>
         내 정보
-      </button>
+      </NavButton>
 
-         <button type="button" onClick={() => navigate('/members')}>
+         <NavButton type="button" onClick={() => navigate('/members')}>
         멤버 목록
-      </button>    
+      </NavButton>    
 
-        <button type="button" onClick={handleLogout}>
+        <NavButton type="button" onClick={handleLogout}>
         로그아웃
-        </button>
+        </NavButton>
     
 
-        </nav>
-        </header> 
+        </Nav>
+        </HeaderWrapper> 
     );
 }
 export default Header;
+
+const HeaderWrapper = styled.header`
+  width: 100%;
+  height: 80px;
+  padding: 0 80px;
+  background-color: ${({ theme }) => theme.colors.navy};
+  color: ${({ theme }) => theme.colors.white};
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const TitleArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+`;
+
+const Title = styled.h1`
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+`;
+
+const Greeting = styled.p`
+  font-size: 12px;
+  color: #d9e4ef;
+`;
+
+const Nav = styled.nav`
+  display: flex;
+  align-items: center;
+  gap: 24px;
+`;
+
+const NavButton = styled.button`
+  color: ${({ theme }) => theme.colors.white};
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 700;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.sky};
+  }
+`;
