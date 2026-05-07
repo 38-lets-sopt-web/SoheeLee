@@ -1,6 +1,8 @@
 import {Link,useNavigate} from 'react-router-dom';
 import { useState } from 'react';
+import styled from "@emotion/styled";
 import api from '@/api/axios';
+
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -38,13 +40,14 @@ function LoginPage() {
         }
     };
   return (
-    <main>
-        <h1>로그인</h1>
+    <AuthPage>
+    <AuthContainer>
+        <Title>로그인</Title>
         
-        <form onSubmit={handleLogin}>
-            <div>
-            <label htmlFor="loginId">아이디</label>
-            <input 
+        <Form onSubmit={handleLogin}>
+            <InputGroup>
+            <Label htmlFor="loginId">아이디</Label>
+            <Input 
             type="text" 
             id="loginId"
             name="loginId"
@@ -52,10 +55,10 @@ function LoginPage() {
             value={loginId} 
             onChange={(event) => setLoginId(event.target.value)}
             />
-            </div>
-            <div>
-            <label htmlFor="password">비밀번호</label>
-            <input 
+            </InputGroup>
+            <InputGroup>
+            <Label htmlFor="password">비밀번호</Label>
+            <Input 
             type="password" 
             id="password"
             name="password"
@@ -63,12 +66,102 @@ function LoginPage() {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             />
-            </div>
-            <button type="submit">로그인</button>
-        </form>
-        <Link to="/signup">회원가입</Link>
-    </main>
+            </InputGroup>
+            <SubmitButton type="submit">로그인</SubmitButton>
+        </Form>
+             <GuideText>
+        계정이 없나요? <SignupLink to="/signup">회원가입</SignupLink>
+      </GuideText>
+    </AuthContainer>
+    </AuthPage>
   );
 }
 
 export default LoginPage;
+
+const AuthPage = styled.main`
+  min-height: 100vh;
+  background-color: ${({ theme }) => theme.colors.background};
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const AuthContainer = styled.section`
+  width: 520px;
+`;
+
+const Title = styled.h1`
+  margin-bottom: 32px;
+
+  text-align: center;
+  font-size: 30px;
+  font-weight: 800;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+`;
+
+const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const Label = styled.label`
+  font-size: 14px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+const Input = styled.input`
+  width: 100%;
+  height: 42px;
+  padding: 0 14px;
+
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.radius.sm};
+  background-color: ${({ theme }) => theme.colors.white};
+
+  font-size: 14px;
+
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.sky};
+  }
+`;
+
+const SubmitButton = styled.button`
+  width: 100%;
+  height: 44px;
+  margin-top: 12px;
+
+  border-radius: ${({ theme }) => theme.radius.sm};
+  background-color: ${({ theme }) => theme.colors.sky};
+  color: ${({ theme }) => theme.colors.white};
+
+  font-size: 15px;
+  font-weight: 700;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.skyHover};
+  }
+`;
+
+const GuideText = styled.p`
+  margin-top: 18px;
+
+  text-align: center;
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.subText};
+`;
+
+const SignupLink = styled(Link)`
+  color: ${({ theme }) => theme.colors.skyHover};
+  font-weight: 700;
+`;
