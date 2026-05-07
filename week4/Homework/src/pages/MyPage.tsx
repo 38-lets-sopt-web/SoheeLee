@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-
 import Header from "@/components/Header";
+import styled from "@emotion/styled";
 import api from "@/api/axios";
+
 
 interface UserInfo {
   id: number;
@@ -86,59 +87,163 @@ function MyPage() {
   };
 
   return (
-    <>
-      <Header />
+  <>
+    <Header />
 
-      <main>
-        <h1>내 정보</h1>
+    <PageContainer>
+      <PageTitle>내 정보</PageTitle>
 
-        <section>
-          <p>아이디: {userInfo?.loginId}</p>
-          <p>파트: {userInfo?.part}</p>
-        </section>
+      <InfoCard>
+        <InfoRow>
+          <InfoLabel>아이디</InfoLabel>
+          <InfoValue>{userInfo?.loginId}</InfoValue>
+        </InfoRow>
 
-        <form onSubmit={handleUpdateMyInfo}>
-          <div>
-            <label htmlFor="name">이름</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="이름을 입력하세요"
-              value={myInfoForm.name}
-              onChange={handleChange}
-            />
-          </div>
+        <InfoRow>
+          <InfoLabel>파트</InfoLabel>
+          <InfoValue>{userInfo?.part}</InfoValue>
+        </InfoRow>
+      </InfoCard>
 
-          <div>
-            <label htmlFor="email">이메일</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="이메일을 입력하세요"
-              value={myInfoForm.email}
-              onChange={handleChange}
-            />
-          </div>
+      <Form onSubmit={handleUpdateMyInfo}>
+        <InputGroup>
+          <Label htmlFor="name">이름</Label>
+          <Input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="이름을 입력하세요"
+            value={myInfoForm.name}
+            onChange={handleChange}
+          />
+        </InputGroup>
 
-          <div>
-            <label htmlFor="age">나이</label>
-            <input
-              type="number"
-              id="age"
-              name="age"
-              placeholder="나이를 입력하세요"
-              value={myInfoForm.age}
-              onChange={handleChange}
-            />
-          </div>
+        <InputGroup>
+          <Label htmlFor="email">이메일</Label>
+          <Input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="이메일을 입력하세요"
+            value={myInfoForm.email}
+            onChange={handleChange}
+          />
+        </InputGroup>
 
-          <button type="submit">정보 수정</button>
-        </form>
-      </main>
-    </>
-  );
+        <InputGroup>
+          <Label htmlFor="age">나이</Label>
+          <Input
+            type="number"
+            id="age"
+            name="age"
+            placeholder="나이를 입력하세요"
+            value={myInfoForm.age}
+            onChange={handleChange}
+          />
+        </InputGroup>
+
+        <SubmitButton type="submit">정보 수정</SubmitButton>
+      </Form>
+    </PageContainer>
+  </>
+);
 }
 
 export default MyPage;
+
+const PageContainer = styled.main`
+  width: 520px;
+  margin: 80px auto 0;
+`;
+
+const PageTitle = styled.h1`
+  margin-bottom: 28px;
+
+  text-align: center;
+  font-size: 30px;
+  font-weight: 800;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+const InfoCard = styled.section`
+  width: 100%;
+  margin-bottom: 28px;
+  padding: 24px;
+
+  border-radius: ${({ theme }) => theme.radius.lg};
+  background-color: ${({ theme }) => theme.colors.white};
+  box-shadow: ${({ theme }) => theme.shadow.card};
+`;
+
+const InfoRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & + & {
+    margin-top: 18px;
+  }
+`;
+
+const InfoLabel = styled.span`
+  font-size: 16px;
+  font-weight: 800;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+const InfoValue = styled.span`
+  font-size: 16px;
+  color: ${({ theme }) => theme.colors.subText};
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+`;
+
+const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const Label = styled.label`
+  font-size: 14px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+const Input = styled.input`
+  width: 100%;
+  height: 42px;
+  padding: 0 14px;
+
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.radius.sm};
+  background-color: ${({ theme }) => theme.colors.white};
+
+  font-size: 14px;
+
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.sky};
+  }
+`;
+
+const SubmitButton = styled.button`
+  width: 100%;
+  height: 44px;
+  margin-top: 18px;
+
+  border-radius: ${({ theme }) => theme.radius.sm};
+  background-color: ${({ theme }) => theme.colors.sky};
+  color: ${({ theme }) => theme.colors.white};
+
+  font-size: 15px;
+  font-weight: 700;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.skyHover};
+  }
+`;
