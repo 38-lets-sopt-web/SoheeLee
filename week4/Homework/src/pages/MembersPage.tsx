@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import { useState, useEffect } from "react";
 import api from "@/api/axios";
 import { useNavigate } from "react-router-dom";
+import styled from "@emotion/styled";
 
 interface User {
   id: number;
@@ -53,61 +54,252 @@ function MembersPage() {
   };
 
   return (
-    <>
-      <Header />
-      <main>
-        <h1>회원 조회</h1>
-        <section>
-          <form onSubmit={handleSearchMember}>
-            <div>
-              <label htmlFor="memberId">회원 ID</label>
-              <input
-                type="text"
-                id="memberId"
-                name="memberId"
-                placeholder="ID를 입력하세요"
-                value={memberId}
-                onChange={(event) => setMemberId(event.target.value)}
-              />
-            </div>
-            <button type="submit" disabled={memberId === ""}>
-              검색
-            </button>
-          </form>
-        </section>
+  <>
+    <Header />
 
-        <section>
-          <h2>검색 결과</h2>
+    <PageContainer>
+      <PageTitle>회원 조회</PageTitle>
+
+      <SearchSection>
+        <SearchForm onSubmit={handleSearchMember}>
+          <InputGroup>
+            <Label htmlFor="memberId">회원 ID</Label>
+            <Input
+              type="text"
+              id="memberId"
+              name="memberId"
+              placeholder="ID를 입력하세요"
+              value={memberId}
+              onChange={(event) => setMemberId(event.target.value)}
+            />
+          </InputGroup>
+
+          <SubmitButton type="submit" disabled={memberId === ""}>
+            검색
+          </SubmitButton>
+        </SearchForm>
+      </SearchSection>
+
+      <ResultSection>
+        <SectionTitle>검색 결과</SectionTitle>
+
+        <ResultCard>
           {searchResult ? (
-            <div>
-              <p>이름: {searchResult.name}</p>
-              <p>아이디: {searchResult.loginId}</p>
-              <p>이메일: {searchResult.email}</p>
-              <p>나이: {searchResult.age}</p>
-              <p>파트: {searchResult.part}</p>
-            </div>
+            <>
+              <InfoRow>
+                <InfoLabel>아이디</InfoLabel>
+                <InfoValue>{searchResult.loginId}</InfoValue>
+              </InfoRow>
+              <InfoRow>
+                <InfoLabel>이름</InfoLabel>
+                <InfoValue>{searchResult.name}</InfoValue>
+              </InfoRow>
+              <InfoRow>
+                <InfoLabel>이메일</InfoLabel>
+                <InfoValue>{searchResult.email}</InfoValue>
+              </InfoRow>
+              <InfoRow>
+                <InfoLabel>나이</InfoLabel>
+                <InfoValue>{searchResult.age}</InfoValue>
+              </InfoRow>
+              <InfoRow>
+                <InfoLabel>파트</InfoLabel>
+                <InfoValue>{searchResult.part}</InfoValue>
+              </InfoRow>
+            </>
           ) : (
-            <p>검색한 회원 정보가 여기에 표시됩니다.</p>
+            <EmptyText>원하는 ID를 검색해 보세요!</EmptyText>
           )}
-        </section>
+        </ResultCard>
+      </ResultSection>
 
-        <section>
-          <h2>전체 멤버 리스트</h2>
-          <ul>
-            {members.map((member) => (
-              <li key={member.id}>
-                <button
-                  type="button"
-                  onClick={() => navigate(`/members/${member.id}`)}>
-                  {member.name} / {member.loginId} / {member.part}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </main>
-    </>
-  );
+      <MemberListSection>
+        <SectionTitle>전체 멤버 리스트</SectionTitle>
+
+        <MemberGrid>
+          {members.map((member) => (
+            <MemberCard
+              key={member.id}
+              type="button"
+              onClick={() => navigate(`/members/${member.id}`)}
+            >
+              <MemberName>{member.name}</MemberName>
+              <PartBadge>{member.part}</PartBadge>
+            </MemberCard>
+          ))}
+        </MemberGrid>
+      </MemberListSection>
+    </PageContainer>
+  </>
+);
 }
 
 export default MembersPage;
+
+const PageContainer = styled.main`
+  width: 900px;
+  margin: 80px auto 0;
+`;
+
+const PageTitle = styled.h1`
+  margin-bottom: 28px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 800;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+const SearchSection = styled.section`
+  width: 520px;
+  margin: 0 auto 36px;
+`;
+
+const SearchForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+`;
+
+const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const Label = styled.label`
+  font-size: 14px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+const Input = styled.input`
+  width: 100%;
+  height: 42px;
+  padding: 0 14px;
+
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.radius.sm};
+  background-color: ${({ theme }) => theme.colors.white};
+
+  font-size: 14px;
+
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.sky};
+  }
+`;
+
+const SubmitButton = styled.button`
+  width: 100%;
+  height: 44px;
+
+  border-radius: ${({ theme }) => theme.radius.sm};
+  background-color: ${({ theme }) => theme.colors.sky};
+  color: ${({ theme }) => theme.colors.white};
+
+  font-size: 15px;
+  font-weight: 700;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.skyHover};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+`;
+
+const ResultSection = styled.section`
+  width: 520px;
+  margin: 0 auto 70px;
+`;
+
+const SectionTitle = styled.h2`
+  margin-bottom: 18px;
+  font-size: 20px;
+  font-weight: 800;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+const ResultCard = styled.div`
+  min-height: 180px;
+  padding: 28px;
+
+  border-radius: ${({ theme }) => theme.radius.lg};
+  background-color: ${({ theme }) => theme.colors.white};
+  box-shadow: ${({ theme }) => theme.shadow.card};
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+`;
+
+const InfoRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const InfoLabel = styled.span`
+  font-size: 16px;
+  font-weight: 800;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+const InfoValue = styled.span`
+  font-size: 16px;
+  color: ${({ theme }) => theme.colors.subText};
+`;
+
+const EmptyText = styled.p`
+  text-align: center;
+  color: ${({ theme }) => theme.colors.subText};
+`;
+
+const MemberListSection = styled.section`
+  width: 100%;
+`;
+
+const MemberGrid = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+`;
+
+const MemberCard = styled.button`
+  height: 96px;
+  padding: 18px;
+
+  border-radius: ${({ theme }) => theme.radius.md};
+  background-color: ${({ theme }) => theme.colors.white};
+  box-shadow: ${({ theme }) => theme.shadow.card};
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+`;
+
+const MemberName = styled.strong`
+  font-size: 16px;
+  font-weight: 800;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+const PartBadge = styled.span`
+  padding: 4px 10px;
+
+  border-radius: 999px;
+  background-color: #edf4fb;
+  color: ${({ theme }) => theme.colors.subText};
+
+  font-size: 12px;
+  font-weight: 700;
+`;
